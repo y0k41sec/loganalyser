@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Log File Search</title>
+  </head>
+  <body>
+    <h1>Log File Search</h1>
+    <form>
+      <label for="search">Search for:</label>
+      <input type="text" id="search" name="search">
+      <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+    <script>
+      const form = document.querySelector('form')
+      const searchInput = document.querySelector('#search')
+      const resultsDiv = document.querySelector('#results')
+
+      form.addEventListener('submit', async event => {
+        event.preventDefault()
+        const searchQuery = searchInput.value
+        const url = `https://<CLOUDFLARE_WORKER_URL>?q=${searchQuery}`
+        const response = await fetch(url)
+        const results = await response.json()
+        resultsDiv.innerHTML = results.map(result => `<p>${result}</p>`).join('')
+      })
+    </script>
+  </body>
+</html>
