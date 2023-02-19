@@ -19,7 +19,7 @@
       form.addEventListener('submit', async event => {
         event.preventDefault()
         const searchQuery = searchInput.value
-        const url = `https://<CLOUDFLARE_WORKER_URL>?q=${searchQuery}`
+        const url = `https://logparse.jonathannogiri1211.workers.dev/?q=${searchQuery}`
         const response = await fetch(url)
         const results = await response.json()
         resultsDiv.innerHTML = results.map(result => `<p>${result}</p>`).join('')
